@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UniqueUsername } from "../../validators/unique-username";
 
 @Component({
 	selector: "app-sign-up",
@@ -8,13 +9,17 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 	styleUrls: ["./sign-up.component.css"]
 })
 export class SignUpComponent {
+	constructor(private uniqueUser: UniqueUsername) {}
+
 	debug = true;
 	signUpForm = new FormGroup({
-		username: new FormControl("", [
-			Validators.required,
-			Validators.minLength(5),
-			Validators.maxLength(8)
-		]),
+		username: new FormControl(
+			"",
+			[Validators.required, Validators.minLength(5), Validators.maxLength(60)],
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			[this.uniqueUser.validate]
+		),
 		password: new FormControl("", [
 			Validators.required,
 			Validators.minLength(5)
@@ -35,8 +40,6 @@ export class SignUpComponent {
 	get passwordConfirmation(): FormControl {
 		return this.signUpForm.get("passwordConfirmation") as FormControl;
 	}
-
-	// constructor() {}
 
 	onSubmit() {}
 }
