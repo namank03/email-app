@@ -1,0 +1,29 @@
+<div class="container mx-auto my-14">
+	<div class="shadow-lg max-w-2xl mx-auto p-4">
+		<h3 class="text-2xl text-center p-6">Sign-Up Form</h3>
+		<form
+			(ngSubmit)="onSubmit()"
+			#signIn="ngForm"
+			[formGroup]="signUpForm"
+			class="flex flex-col items-center"
+		>
+			<app-input [control]="username" label="User Name"></app-input>
+			<app-input
+				[control]="password"
+				label="password"
+				[type]="'password'"
+			></app-input>
+			<app-input
+				[control]="passwordConfirmation"
+				label="Password Confirmation"
+			></app-input>
+			<button type="submit" mat-raised-button [disabled]="!signUpForm.valid">
+				Submit
+			</button>
+			<div *ngIf="debug">
+				Errors = {{signUpForm.errors | json}} Value = {{signUpForm.value |
+				json}}
+			</div>
+		</form>
+	</div>
+</div>

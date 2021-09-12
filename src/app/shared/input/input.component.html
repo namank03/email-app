@@ -1,0 +1,20 @@
+<p>
+	<mat-form-field appearance="fill">
+		<mat-label>{{label}}</mat-label>
+		<input matInput required [formControl]="control" type="{{type}}" />
+		<mat-error *ngIf="control.errors?.required">
+			This Field is required</mat-error
+		>
+		<mat-error *ngIf="control.errors?.minlength">
+			Min length required is
+			{{control.errors?.minlength.requiredLength}}</mat-error
+		>
+		<mat-error *ngIf="control.errors?.maxlength">
+			Min length required is
+			{{control.errors?.maxlength.requiredLength}}</mat-error
+		>
+	</mat-form-field>
+</p>
+<div *ngIf="debug">
+	Errors = {{control.errors | json}} Value = {{control.value | json}}
+</div>
