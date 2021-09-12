@@ -41,7 +41,7 @@ export class SignInComponent {
 			() => {
 				formDirective.resetForm();
 				this.signInForm.reset();
-				await this.router.navigateByUrl("/inbox");
+				this.router.navigateByUrl("/inbox");
 			},
 			(err) => {
 				if (!err.status)
