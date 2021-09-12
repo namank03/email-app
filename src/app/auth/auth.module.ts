@@ -7,7 +7,7 @@ import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../material/material.module";
 import { SharedModule } from "../shared/shared.module";
-import { SignOutComponent } from './components/sign-out/sign-out.component';
+import { SignOutComponent } from "./components/sign-out/sign-out.component";
 
 @NgModule({
 	declarations: [SignUpComponent, SignInComponent, SignOutComponent],

@@ -16,12 +16,16 @@
 			<app-input
 				[control]="passwordConfirmation"
 				label="Password Confirmation"
+				[type]="'password'"
 			></app-input>
 			<mat-error *ngIf="username.errors?.noInternetConnection">
 				No internet connection</mat-error
 			>
 			<mat-error *ngIf="username.errors?.someUnknownError">
 				Some Unkwown Error Occured</mat-error
+			>
+			<mat-error *ngIf="signUpForm.errors?.passwordNotMatched">
+				Password mismatch</mat-error
 			>
 			<button type="submit" mat-raised-button [disabled]="!signUpForm.valid">
 				Submit

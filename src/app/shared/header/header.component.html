@@ -8,17 +8,21 @@
 		</li>
 	</ul>
 	<ul class="flex flex-row">
-		<li class="px-2">
-			<a [routerLink]="['/sign-in']" routerLinkActive="active">Sign-In</a>
-		</li>
-		<li class="px-2">
-			<a [routerLink]="['/']" routerLinkActive="active">Sign-Up</a>
-		</li>
-		<li class="px-2">
-			<a [routerLink]="['/inbox']" routerLinkActive="active">Inbox</a>
-		</li>
-		<li class="px-2">
-			<a [routerLink]="['/sign-out']" routerLinkActive="active">Sign-Out</a>
-		</li>
+		<ng-container *ngIf="(singedIn$ | async) !== true">
+			<li class="px-2">
+				<a [routerLink]="['/sign-in']" routerLinkActive="active">Sign-In</a>
+			</li>
+			<li class="px-2">
+				<a [routerLink]="['/']" routerLinkActive="active">Sign-Up</a>
+			</li>
+		</ng-container>
+		<ng-container *ngIf="(singedIn$ | async)">
+			<li class="px-2">
+				<a [routerLink]="['/inbox']" routerLinkActive="active">Inbox</a>
+			</li>
+			<li class="px-2">
+				<a [routerLink]="['/sign-out']" routerLinkActive="active">Sign-Out</a>
+			</li>
+		</ng-container>
 	</ul>
 </nav>
