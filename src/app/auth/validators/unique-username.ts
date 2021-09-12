@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Injectable } from "@angular/core";
 import { AsyncValidator, FormControl } from "@angular/forms";
 import { of } from "rxjs";
@@ -23,7 +24,11 @@ export class UniqueUsername implements AsyncValidator {
 			distinctUntilChanged(),
 			switchMap((val) => this.authService.getUsername(val)),
 			map(() => null),
-			catchError(() => of({ notUnique: true }))
+			catchError((err) => {
+				if (err?.status === 0) return of({ noInternetConnection: true });
+				else if (err?.error?.username) return of({ notUnique: true });
+				else return of({ someUnknownError: true });
+			})
 		);
 	};
 }

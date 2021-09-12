@@ -7,7 +7,7 @@ import { FormControl } from "@angular/forms";
 	styleUrls: ["./input.component.css"]
 })
 export class InputComponent {
-	debug = true;
+	debug = false;
 	@Input() label!: string;
 	@Input() type = "text";
 	@Input() control!: FormControl;

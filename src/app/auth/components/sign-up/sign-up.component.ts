@@ -11,7 +11,7 @@ import { UniqueUsername } from "../../validators/unique-username";
 export class SignUpComponent {
 	constructor(private uniqueUser: UniqueUsername) {}
 
-	debug = true;
+	debug = false;
 	signUpForm = new FormGroup({
 		username: new FormControl(
 			"",

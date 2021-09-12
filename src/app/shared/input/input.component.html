@@ -13,6 +13,7 @@
 			Min length required is
 			{{control.errors?.maxlength.requiredLength}}</mat-error
 		>
+		<mat-error *ngIf="control.errors?.notUnique"> User name taken</mat-error>
 	</mat-form-field>
 </p>
 <div *ngIf="debug">
