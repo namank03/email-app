@@ -1,0 +1,23 @@
+<div *ngFor="let project of projects$ | async">
+	<div (click)="selectedId.next(project.id)">{{ project.title}}</div>
+
+	<!-- <div (click)="fetchPost(project.id)">{{ project.title}}</div> -->
+
+	<!-- <div>{{ project.author }}</div> -->
+</div>
+
+<!-- {{post | json}} -->
+<!-- {{selectedPost$ | async | json}} -->
+
+<!-- <ng-container *ngIf="selectedPost$ | async as selectedPost">
+	<h1 class="text-2xl font-bold">Selected Post</h1>
+	<p>{{selectedPost.title}}</p>
+	<p>{{selectedPost.author}}</p>
+</ng-container> -->
+
+<h1>Works!!</h1>
+<form (ngSubmit)="onSubmit()" [formGroup]="rxjsForm">
+	<input type="number" [formControl]="postId" />
+</form>
+
+{{ postId.value | json }}

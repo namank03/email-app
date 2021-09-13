@@ -1,7 +1,12 @@
 <nav class="p-6 flex flex-row justify-between bg-gray-700 text-gray-50">
 	<ul class="flex flex-row">
 		<li class="px-2">
-			<a [routerLink]="['/']" routerLinkActive="active">Home</a>
+			<a
+				[routerLink]="['/']"
+				routerLinkActive="active"
+				[routerLinkActiveOptions]="{exact: true}"
+				>Home</a
+			>
 		</li>
 		<li class="px-2">
 			<a [routerLink]="['/About']" routerLinkActive="active">About</a>
@@ -13,7 +18,12 @@
 				<a [routerLink]="['/sign-in']" routerLinkActive="active">Sign-In</a>
 			</li>
 			<li class="px-2">
-				<a [routerLink]="['/']" routerLinkActive="active">Sign-Up</a>
+				<a
+					[routerLink]="['/']"
+					routerLinkActive="active"
+					[routerLinkActiveOptions]="{exact: true}"
+					>Sign-Up</a
+				>
 			</li>
 		</ng-container>
 		<ng-container *ngIf="(singedIn$ | async)">

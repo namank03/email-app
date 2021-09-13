@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/unbound-method */
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component } from "@angular/core";
 import {
 	FormControl,
@@ -36,18 +37,19 @@ export class SignInComponent {
 		return this.signInForm.get("password") as FormControl;
 	}
 
-	onSubmit(formDirective: FormGroupDirective) {
+	onSubmit(formDirective: FormGroupDirective): void {
 		this.authService.signIn(this.signInForm.value).subscribe(
 			() => {
 				formDirective.resetForm();
 				this.signInForm.reset();
-				this.router.navigateByUrl("/inbox");
+				this.router.navigateByUrl("/inbox").catch((err) => console.log(err));
 			},
-			(err) => {
+			(err: HttpErrorResponse) => {
+				console.log("err in signin", err);
 				if (!err.status)
 					this.signInForm.setErrors({ noInternetConnection: true });
-				else if (err.error.username || err.error.password)
-					this.signInForm.setErrors({ invalidUsernameOrPassword: true });
+				else if (err.error?.username || err.error?.password)
+					this.signInForm.setErrors({ invalidCredentials: true });
 				else this.signInForm.setErrors({ someUnknownError: true });
 			}
 		);

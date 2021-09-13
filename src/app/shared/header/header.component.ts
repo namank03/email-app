@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Observable } from "rxjs";
 
 @Component({
@@ -6,9 +6,6 @@ import { Observable } from "rxjs";
 	templateUrl: "./header.component.html",
 	styleUrls: ["./header.component.css"]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 	@Input() singedIn$!: Observable<boolean | null>;
-	constructor() {}
-
-	ngOnInit(): void {}
 }

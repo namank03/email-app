@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AuthService } from "./auth/services/auth.service";
 
 @Component({
@@ -8,10 +9,13 @@ import { AuthService } from "./auth/services/auth.service";
 })
 export class AppComponent implements OnInit {
 	singedIn$ = this.authService.singedIn$;
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private router: Router) {}
 	title = "email-app";
 
-	ngOnInit() {
-		this.authService.checkAuth().subscribe(() => {});
+	ngOnInit(): void {
+		this.authService.checkAuth().subscribe((val) => {
+			if (val.authenticated)
+				this.router.navigateByUrl("/inbox").catch((err) => console.log(err));
+		});
 	}
 }

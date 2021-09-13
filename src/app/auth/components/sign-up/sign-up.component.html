@@ -2,7 +2,7 @@
 	<div class="shadow-lg max-w-2xl mx-auto p-4">
 		<h3 class="text-2xl text-center p-6">Sign-Up Form</h3>
 		<form
-			(ngSubmit)="onSubmit()"
+			(ngSubmit)="onSubmit(signIn)"
 			#signIn="ngForm"
 			[formGroup]="signUpForm"
 			class="flex flex-col items-center"

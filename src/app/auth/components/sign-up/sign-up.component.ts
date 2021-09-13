@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/unbound-method */
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {
+	FormControl,
+	FormGroup,
+	FormGroupDirective,
+	Validators
+} from "@angular/forms";
+import { Router } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
 import { MatchPassword } from "../../validators/match-password";
 import { UniqueUsername } from "../../validators/unique-username";
 
@@ -12,7 +20,9 @@ import { UniqueUsername } from "../../validators/unique-username";
 export class SignUpComponent {
 	constructor(
 		private uniqueUser: UniqueUsername,
-		private matchPassword: MatchPassword
+		private matchPassword: MatchPassword,
+		private authService: AuthService,
+		private router: Router
 	) {}
 
 	debug = false;
@@ -54,5 +64,19 @@ export class SignUpComponent {
 		return this.signUpForm.get("passwordConfirmation") as FormControl;
 	}
 
-	onSubmit() {}
+	onSubmit(formDirective: FormGroupDirective): void {
+		this.authService.addUser(this.signUpForm.value).subscribe(
+			() => {
+				formDirective.resetForm();
+				this.signUpForm.reset();
+				this.router.navigateByUrl("/inbox").catch((err) => console.log(err));
+			},
+			(err: HttpErrorResponse) => {
+				console.log("err while sign up", err);
+				if (!err.status)
+					this.signUpForm.setErrors({ noInternetConnection: true });
+				else this.signUpForm.setErrors({ someUnknownError: true });
+			}
+		);
+	}
 }
