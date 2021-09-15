@@ -1,8 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
-import { Observable, Subject } from "rxjs";
-import { distinctUntilChanged, switchMap } from "rxjs/operators";
-import { Post, RxjsService } from "../services/rxjs.service";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { BehaviorSubject, interval } from "rxjs";
+import { throttleTime } from "rxjs/operators";
+import { ChildComponent } from "../child/child.component";
 
 @Component({
 	selector: "app-home",
@@ -10,38 +9,22 @@ import { Post, RxjsService } from "../services/rxjs.service";
 	styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-	selectedId = new Subject<number>();
+	@ViewChild("test") test_naman!: ElementRef<HTMLElement>;
 
-	selectedPost$!: Observable<Post>;
-	projects$: Observable<Post[]>;
+	@ViewChild("app-child") childComp!: ChildComponent;
 
-	post!: Post;
+	currentCount = new BehaviorSubject<number>(0);
 
-	rxjsForm = new FormGroup({
-		postId: new FormControl(1)
-	});
-
-	constructor(private rxjsService: RxjsService) {
-		this.projects$ = this.rxjsService.getPosts();
-	}
+	count = 0;
+	numberInterval$ = interval(500).pipe(
+		// tap((val) => console.log("before", val)),
+		throttleTime(1000)
+		// tap((val) => console.log("after", val))
+	);
 
 	ngOnInit(): void {
-		console.log("Initialized");
-		this.selectedId
-			.pipe(
-				distinctUntilChanged(),
-				switchMap((val) => this.rxjsService.getPost(val))
-			)
-			.subscribe((val) => {
-				this.post = val;
-			});
+		this.test_naman.nativeElement;
 	}
 
-	get postId(): FormControl {
-		return this.rxjsForm.get("postId") as FormControl;
-	}
-
-	onSubmit() {
-		console.log("form value", this.rxjsForm.value);
-	}
+	ngAfterViewInit() {}
 }

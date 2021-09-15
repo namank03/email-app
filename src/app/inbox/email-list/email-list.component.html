@@ -1,1 +1,6 @@
-<p>email-list works!</p>
+<div *ngFor="let email of emails$ | async" (click)="selectedId.next(email.id)">
+	{{ email.subject}}
+</div>
+
+<h2>Selected Email :</h2>
+{{selectedEmail$ | async | json }}

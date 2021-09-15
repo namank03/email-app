@@ -15,8 +15,8 @@ import { RxjsHttpInterceptor } from "./rxjs/interceptors/rxjs-interceptor";
 	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
-		AuthModule,
-		// RxjsModule,
+		// AuthModule,
+		RxjsModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
 		SharedModule,
@@ -25,7 +25,7 @@ import { RxjsHttpInterceptor } from "./rxjs/interceptors/rxjs-interceptor";
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,
-			useClass: AuthHttpInterceptor,
+			useClass: RxjsHttpInterceptor,
 			multi: true
 		}
 	],

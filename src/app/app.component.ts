@@ -8,8 +8,11 @@ import { AuthService } from "./auth/services/auth.service";
 	styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-	singedIn$ = this.authService.singedIn$;
-	constructor(private authService: AuthService, private router: Router) {}
+	singedIn$;
+
+	constructor(private authService: AuthService, private router: Router) {
+		this.singedIn$ = this.authService.singedIn$;
+	}
 	title = "email-app";
 
 	ngOnInit(): void {

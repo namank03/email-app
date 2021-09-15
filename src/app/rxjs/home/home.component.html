@@ -1,23 +1,8 @@
-<div *ngFor="let project of projects$ | async">
-	<div (click)="selectedId.next(project.id)">{{ project.title}}</div>
-
-	<!-- <div (click)="fetchPost(project.id)">{{ project.title}}</div> -->
-
-	<!-- <div>{{ project.author }}</div> -->
+<button mat-raised-button (click)="currentCount.next(2)">Action</button>
+<div #test>
+	<h1>home works</h1>
 </div>
 
-<!-- {{post | json}} -->
-<!-- {{selectedPost$ | async | json}} -->
+{{numberInterval$ | async }}
 
-<!-- <ng-container *ngIf="selectedPost$ | async as selectedPost">
-	<h1 class="text-2xl font-bold">Selected Post</h1>
-	<p>{{selectedPost.title}}</p>
-	<p>{{selectedPost.author}}</p>
-</ng-container> -->
-
-<h1>Works!!</h1>
-<form (ngSubmit)="onSubmit()" [formGroup]="rxjsForm">
-	<input type="number" [formControl]="postId" />
-</form>
-
-{{ postId.value | json }}
+<app-child [anushkaDumb]="numberInterval$ | async"> </app-child>
