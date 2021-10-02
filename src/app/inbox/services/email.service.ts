@@ -2,13 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-interface EmailSummary {
+export interface EmailSummary {
 	from: string;
 	id: string;
 	subject: string;
 }
 
-interface Email {
+export interface Email {
 	from: string;
 	html: string;
 	id: string;

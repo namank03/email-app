@@ -1,1 +1,14 @@
-<p>email-show works!</p>
+<div class="container" *ngIf="email;else noEmail">
+	<div class="email__Info">
+		<strong>{{email.subject}}</strong>
+		<h4>FROM : {{email.from}}</h4>
+	</div>
+	<div
+		[innerHTML]="email.html"
+		class="email__Body border-t-2 border-red-700"
+	></div>
+</div>
+
+<ng-template #noEmail>
+	<h1>No Email Selected........</h1>
+</ng-template>
