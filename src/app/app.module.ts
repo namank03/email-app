@@ -8,15 +8,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthHttpInterceptor } from "./auth/interceptor/auth-http-interceptor";
 import { SharedModule } from "./shared/shared.module";
-import { RxjsModule } from "./rxjs/rxjs.module";
-import { RxjsHttpInterceptor } from "./rxjs/interceptors/rxjs-interceptor";
 
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
-		// AuthModule,
-		RxjsModule,
+		AuthModule,
+		// RxjsModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
 		SharedModule,
@@ -25,7 +23,7 @@ import { RxjsHttpInterceptor } from "./rxjs/interceptors/rxjs-interceptor";
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,
-			useClass: RxjsHttpInterceptor,
+			useClass: AuthHttpInterceptor,
 			multi: true
 		}
 	],
