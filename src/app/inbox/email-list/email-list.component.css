@@ -1,0 +1,11 @@
+.email__List {
+	height: 90vh;
+}
+
+.email__Item {
+	transition: all 0.2 ease-in-out;
+}
+
+.email__Item:hover {
+	transform: scale(1.08);
+}

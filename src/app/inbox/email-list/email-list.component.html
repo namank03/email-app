@@ -1,6 +1,25 @@
-<div *ngFor="let email of emails$ | async" (click)="selectedId.next(email.id)">
-	{{ email.subject}}
+<!-- <div class="container mx-auto"> -->
+<div class="grid grid-cols-4 gap-2">
+	<div
+		class="bg-gray-200 p-2 text-center email__List border-r-2 border-red-700"
+	>
+		<div
+			*ngFor="let email of emails$ | async"
+			(click)="selectedId.next(email.id)"
+			class="
+				border-b-2 border-blue-200
+				p-2
+				m-2
+				cursor-pointer
+				hover:border-red-700 hover:shadow-lg
+				email__Item
+			"
+		>
+			{{ email.subject}}
+		</div>
+	</div>
+	<div class="col-span-3 text-center">
+		<app-email-show [email]="selectedEmail$ | async"></app-email-show>
+	</div>
 </div>
-
-<h2>Selected Email :</h2>
-{{selectedEmail$ | async | json }}
+<!-- </div> -->
