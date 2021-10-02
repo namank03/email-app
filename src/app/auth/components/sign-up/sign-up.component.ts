@@ -26,6 +26,7 @@ export class SignUpComponent {
 	) {}
 
 	debug = false;
+
 	signUpForm = new FormGroup(
 		{
 			username: new FormControl(
