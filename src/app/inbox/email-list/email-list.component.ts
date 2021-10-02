@@ -9,14 +9,7 @@ import { EmailService, EmailSummary } from "../services/email.service";
 	styleUrls: ["./email-list.component.css"]
 })
 export class EmailListComponent {
-	selectedId = new Subject<string>();
 	emails$!: Observable<EmailSummary[]>;
-
-	selectedEmail$ = this.selectedId.pipe(
-		distinctUntilChanged(),
-		tap((val) => console.log("value inside tap", val)),
-		switchMap((email_id: string) => this.emailService.getEmail(email_id))
-	);
 
 	constructor(private emailService: EmailService) {
 		this.emails$ = this.emailService.getEmails();

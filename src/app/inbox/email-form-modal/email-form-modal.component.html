@@ -1,0 +1,20 @@
+<div class="flex flex-col items-center">
+	<h1 mat-dialog-title>Create a new Email</h1>
+	<div mat-dialog-content>
+		<app-input [control]="to" label="to"></app-input>
+		<app-input [control]="from" label="from"></app-input>
+		<app-input [control]="subject" label="subject"></app-input>
+		<app-input [control]="content" label="content"></app-input>
+	</div>
+	<div mat-dialog-actions>
+		<button mat-button (click)="onNoClick()">No Thanks</button>
+		<!-- TODO: understand the use of cdkFocusInitial -->
+		<button
+			mat-button
+			[mat-dialog-close]="emailCreateForm.value"
+			cdkFocusInitial
+		>
+			Ok
+		</button>
+	</div>
+</div>

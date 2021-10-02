@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { Observable } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { map, pluck, switchMap, tap } from "rxjs/operators";
 import { Email, EmailService } from "../services/email.service";
 
 @Component({
@@ -18,9 +18,8 @@ export class EmailShowComponent implements OnInit {
 
 	ngOnInit() {
 		this.email$ = this.route.paramMap.pipe(
-			switchMap((params: ParamMap) =>
-				this.emailService.getEmail(params.get("id")!)
-			)
+			map((params: ParamMap) => params.get("id")!),
+			switchMap((id: string) => this.emailService.getEmail(id))
 		);
 	}
 }

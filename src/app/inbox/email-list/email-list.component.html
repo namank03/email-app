@@ -3,6 +3,9 @@
 	<div
 		class="bg-gray-200 p-2 text-center email__List border-r-2 border-red-700"
 	>
+		<div class="border-b-4 border-red-300 py-3">
+			<app-email-create></app-email-create>
+		</div>
 		<div
 			*ngFor="let email of emails$ | async"
 			class="
@@ -23,6 +26,3 @@
 		<router-outlet></router-outlet>
 	</div>
 </div>
-<!-- </div> -->
-<!-- (click)="selectedId.next(email.id)" -->
-<!-- <app-email-show [email]="selectedEmail$ | async"></app-email-show> -->
