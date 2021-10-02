@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Email } from "../services/email.service";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, ParamMap } from "@angular/router";
+import { Observable } from "rxjs";
+import { switchMap } from "rxjs/operators";
+import { Email, EmailService } from "../services/email.service";
 
 @Component({
 	selector: "app-email-show",
@@ -7,8 +10,17 @@ import { Email } from "../services/email.service";
 	styleUrls: ["./email-show.component.css"]
 })
 export class EmailShowComponent implements OnInit {
-	@Input() email!: Email | null;
-	constructor() {}
+	email$!: Observable<Email>;
+	constructor(
+		private route: ActivatedRoute,
+		private emailService: EmailService
+	) {}
 
-	ngOnInit(): void {}
+	ngOnInit() {
+		this.email$ = this.route.paramMap.pipe(
+			switchMap((params: ParamMap) =>
+				this.emailService.getEmail(params.get("id")!)
+			)
+		);
+	}
 }

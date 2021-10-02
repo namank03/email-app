@@ -5,7 +5,6 @@
 	>
 		<div
 			*ngFor="let email of emails$ | async"
-			(click)="selectedId.next(email.id)"
 			class="
 				border-b-2 border-blue-200
 				p-2
@@ -14,12 +13,16 @@
 				hover:border-red-700 hover:shadow-lg
 				email__Item
 			"
+			[routerLink]="['/inbox', email.id]"
+			routerLinkActive="active"
 		>
-			{{ email.subject}}
+			{{email.subject}}
 		</div>
 	</div>
 	<div class="col-span-3 text-center">
-		<app-email-show [email]="selectedEmail$ | async"></app-email-show>
+		<router-outlet></router-outlet>
 	</div>
 </div>
 <!-- </div> -->
+<!-- (click)="selectedId.next(email.id)" -->
+<!-- <app-email-show [email]="selectedEmail$ | async"></app-email-show> -->
