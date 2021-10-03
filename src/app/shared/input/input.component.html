@@ -1,7 +1,20 @@
 <p>
 	<mat-form-field appearance="fill">
 		<mat-label>{{label}}</mat-label>
-		<input matInput required [formControl]="control" type="{{type}}" />
+
+		<ng-container *ngIf="!textarea;else block">
+			<input matInput required [formControl]="control" type="{{type}}" />
+		</ng-container>
+
+		<ng-template #block>
+			<textarea
+				matInput
+				required
+				[formControl]="control"
+				type="{{type}}"
+			></textarea>
+		</ng-template>
+
 		<mat-error *ngIf="control.errors?.required">
 			This Field is required</mat-error
 		>
@@ -19,6 +32,9 @@
 		>
 		<mat-error *ngIf="control.errors?.someUnknownError">
 			Some Unkwown Error Occured</mat-error
+		>
+		<mat-error *ngIf="control.errors?.email">
+			Please enter correct email address</mat-error
 		>
 	</mat-form-field>
 </p>

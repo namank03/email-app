@@ -4,14 +4,18 @@
 		<app-input [control]="to" label="to"></app-input>
 		<app-input [control]="from" label="from"></app-input>
 		<app-input [control]="subject" label="subject"></app-input>
-		<app-input [control]="content" label="content"></app-input>
+		<app-input
+			[control]="content"
+			label="content"
+			[textarea]="true"
+		></app-input>
 	</div>
 	<div mat-dialog-actions>
-		<button mat-button (click)="onNoClick()">No Thanks</button>
+		<button mat-button (click)="onNoClick()">Cancel</button>
 		<!-- TODO: understand the use of cdkFocusInitial -->
 		<button
 			mat-button
-			[mat-dialog-close]="emailCreateForm.value"
+			[mat-dialog-close]="emailCreateForm.getRawValue()"
 			cdkFocusInitial
 		>
 			Ok

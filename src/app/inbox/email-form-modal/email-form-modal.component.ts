@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { Component, Inject } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 export interface DialogData {
-	animal: string;
-	name: string;
+	username: string;
+	subject?: string;
 }
 
 @Component({
@@ -14,11 +15,28 @@ export interface DialogData {
 	styleUrls: ["./email-form-modal.component.css"]
 })
 export class EmailFormModalComponent {
+	username = `${this.data?.username}@angular-email.com`;
+
+	constructor(
+		public dialogRef: MatDialogRef<EmailFormModalComponent>,
+		@Inject(MAT_DIALOG_DATA) public data: DialogData
+	) {}
+
 	emailCreateForm = new FormGroup({
-		to: new FormControl(""),
-		from: new FormControl("naman@gmail.com"),
-		subject: new FormControl("test-subject"),
-		content: new FormControl("")
+		to: new FormControl("", [
+			Validators.required,
+			Validators.minLength(5),
+			Validators.email
+		]),
+		from: new FormControl({ value: this.username, disabled: true }),
+		subject: new FormControl("", [
+			Validators.required,
+			Validators.minLength(5)
+		]),
+		content: new FormControl("", [
+			Validators.required,
+			Validators.minLength(20)
+		])
 	});
 
 	get to(): FormControl {
@@ -35,13 +53,6 @@ export class EmailFormModalComponent {
 
 	get content(): FormControl {
 		return this.emailCreateForm.get("content") as FormControl;
-	}
-
-	constructor(
-		public dialogRef: MatDialogRef<EmailFormModalComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: DialogData
-	) {
-		console.log("modal data is", data);
 	}
 
 	onNoClick(): void {
