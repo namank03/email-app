@@ -12,6 +12,7 @@ import { EmailReplyComponent } from "./email-reply/email-reply.component";
 import { EmailFormModalComponent } from "./email-form-modal/email-form-modal.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
+
 @NgModule({
 	declarations: [
 		EmailShowComponent,
