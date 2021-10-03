@@ -9,11 +9,16 @@ export interface EmailSummary {
 }
 
 export interface Email {
-	from: string;
-	html: string;
-	id: string;
+	from?: string;
+	to: string;
+	html?: string;
+	id?: string;
 	subject: string;
 	text: string;
+}
+
+export interface EmailSendResponse {
+	status: string;
 }
 
 @Injectable({
@@ -30,5 +35,9 @@ export class EmailService {
 
 	getEmails(): Observable<EmailSummary[]> {
 		return this.http.get<EmailSummary[]>(`${this.rootURL}/emails`);
+	}
+
+	postEmail(email: Email): Observable<EmailSendResponse> {
+		return this.http.post<EmailSendResponse>(`${this.rootURL}/emails`, email);
 	}
 }

@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { Observable } from "rxjs";
 import { AuthService } from "src/app/auth/services/auth.service";
 import { EmailFormModalComponent } from "../email-form-modal/email-form-modal.component";
+import { Email, EmailService } from "../services/email.service";
 
 @Component({
 	selector: "app-email-create",
@@ -11,7 +11,11 @@ import { EmailFormModalComponent } from "../email-form-modal/email-form-modal.co
 })
 export class EmailCreateComponent {
 	username!: string;
-	constructor(public dialog: MatDialog, private authService: AuthService) {
+	constructor(
+		public dialog: MatDialog,
+		private authService: AuthService,
+		private emailService: EmailService
+	) {
 		this.authService.username$.subscribe((val) => (this.username = val));
 	}
 
@@ -21,9 +25,10 @@ export class EmailCreateComponent {
 			data: { username: this.username }
 		});
 
-		dialogRef.afterClosed().subscribe((result) => {
-			console.log("The dialog was closed with result = ", result);
-			// get form data and send req to api
+		dialogRef.afterClosed().subscribe((result: Email) => {
+			if (result) {
+				this.emailService.postEmail(result).subscribe();
+			}
 		});
 	}
 }

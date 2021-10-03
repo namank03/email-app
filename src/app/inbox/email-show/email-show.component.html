@@ -1,7 +1,10 @@
 <div class="container" *ngIf="email$ | async as email;else noEmail">
 	<div class="email__Info">
-		<strong>{{email.subject}}</strong>
-		<h4>FROM : {{email.from}}</h4>
+		<div>
+			<strong>{{email.subject}}</strong>
+			<h4>FROM : {{email.from}}</h4>
+		</div>
+		<app-email-reply [subject]="email.subject"></app-email-reply>
 	</div>
 	<div
 		[innerHTML]="email.html"

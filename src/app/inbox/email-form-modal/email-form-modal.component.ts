@@ -29,14 +29,11 @@ export class EmailFormModalComponent {
 			Validators.email
 		]),
 		from: new FormControl({ value: this.username, disabled: true }),
-		subject: new FormControl("", [
-			Validators.required,
-			Validators.minLength(5)
-		]),
-		content: new FormControl("", [
-			Validators.required,
-			Validators.minLength(20)
-		])
+		subject: new FormControl(
+			`${this.data?.subject ? this.data?.subject : ""}`,
+			[Validators.required, Validators.minLength(5)]
+		),
+		text: new FormControl("", [Validators.required, Validators.minLength(20)])
 	});
 
 	get to(): FormControl {
@@ -51,8 +48,8 @@ export class EmailFormModalComponent {
 		return this.emailCreateForm.get("subject") as FormControl;
 	}
 
-	get content(): FormControl {
-		return this.emailCreateForm.get("content") as FormControl;
+	get text(): FormControl {
+		return this.emailCreateForm.get("text") as FormControl;
 	}
 
 	onNoClick(): void {
