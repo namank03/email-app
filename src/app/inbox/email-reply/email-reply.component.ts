@@ -11,6 +11,8 @@ import { Email, EmailService } from "../services/email.service";
 })
 export class EmailReplyComponent {
 	@Input() subject = "";
+	@Input() from = "";
+
 	username!: string;
 	constructor(
 		public dialog: MatDialog,
@@ -23,7 +25,7 @@ export class EmailReplyComponent {
 	openDialog(): void {
 		const dialogRef = this.dialog.open(EmailFormModalComponent, {
 			width: "500px",
-			data: { username: this.username, subject: this.subject }
+			data: { username: this.username, subject: this.subject, to: this.from }
 		});
 
 		dialogRef.afterClosed().subscribe((result: Email) => {

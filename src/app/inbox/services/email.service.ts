@@ -9,7 +9,7 @@ export interface EmailSummary {
 }
 
 export interface Email {
-	from?: string;
+	from: string;
 	to: string;
 	html?: string;
 	id?: string;

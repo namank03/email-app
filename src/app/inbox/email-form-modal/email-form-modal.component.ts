@@ -7,6 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 export interface DialogData {
 	username: string;
 	subject?: string;
+	to?: string;
 }
 
 @Component({
@@ -23,7 +24,7 @@ export class EmailFormModalComponent {
 	) {}
 
 	emailCreateForm = new FormGroup({
-		to: new FormControl("", [
+		to: new FormControl(`${this.data?.to ? this.data?.to : ""}`, [
 			Validators.required,
 			Validators.minLength(5),
 			Validators.email

@@ -4,7 +4,10 @@
 			<strong>{{email.subject}}</strong>
 			<h4>FROM : {{email.from}}</h4>
 		</div>
-		<app-email-reply [subject]="email.subject"></app-email-reply>
+		<app-email-reply
+			[subject]="email.subject"
+			[from]="email.from"
+		></app-email-reply>
 	</div>
 	<div
 		[innerHTML]="email.html"
