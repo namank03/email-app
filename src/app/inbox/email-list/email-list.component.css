@@ -9,3 +9,7 @@
 .email__Item:hover {
 	transform: scale(1.08);
 }
+
+.active {
+	color: rgba(196, 99, 70, 0.774);
+}
