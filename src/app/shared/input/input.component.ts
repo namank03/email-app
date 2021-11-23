@@ -11,4 +11,5 @@ export class InputComponent {
 	@Input() label!: string;
 	@Input() type = "text";
 	@Input() control!: FormControl;
+	@Input() textarea = false;
 }

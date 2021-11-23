@@ -1,7 +1,13 @@
-<div class="container" *ngIf="email;else noEmail">
+<div class="container" *ngIf="email$ | async as email;else noEmail">
 	<div class="email__Info">
-		<strong>{{email.subject}}</strong>
-		<h4>FROM : {{email.from}}</h4>
+		<div>
+			<strong>{{email.subject}}</strong>
+			<h4>FROM : {{email.from}}</h4>
+		</div>
+		<app-email-reply
+			[subject]="email.subject"
+			[from]="email.from"
+		></app-email-reply>
 	</div>
 	<div
 		[innerHTML]="email.html"
@@ -10,5 +16,5 @@
 </div>
 
 <ng-template #noEmail>
-	<h1>No Email Selected........</h1>
+	<h1>Loading.......</h1>
 </ng-template>
